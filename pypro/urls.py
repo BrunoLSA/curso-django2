@@ -19,7 +19,13 @@ from django.urls import path, include
 
 from pypro.base.views import home
 
+
+def trigger_error(request):
+    division_by_zero = 1 / 0 # noqa
+
+
 urlpatterns = [
+    path('sentry-debug/', trigger_error),
     path('admin/', admin.site.urls),
     path('', home),
 ]
