@@ -17,8 +17,6 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 
-from pypro.base.views import home
-
 
 def trigger_error(request):
     division_by_zero = 1 / 0 # noqa
@@ -27,7 +25,7 @@ def trigger_error(request):
 urlpatterns = [
     path('sentry-debug/', trigger_error),
     path('admin/', admin.site.urls),
-    path('', home),
+    path('', include('pypro.base.urls')),
 ]
 
 if settings.DEBUG:
