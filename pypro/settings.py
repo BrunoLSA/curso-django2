@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     # my apps
     'pypro.base',
+    'pypro.aperitivos',
 ]
 
 MIDDLEWARE = [
