@@ -45,11 +45,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'collectfast',
     'django.contrib.staticfiles',
+    'django_extensions',
 
     # my apps
     'pypro.base',
     'pypro.aperitivos',
     'pypro.modulos',
+    'pypro.turmas',
 
     # third party apps
     'ordered_model',
