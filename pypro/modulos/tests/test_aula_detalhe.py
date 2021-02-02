@@ -17,8 +17,8 @@ def aula(modulo):
 
 
 @pytest.fixture
-def response(client, aula):
-    response = client.get(reverse("modulos:aula", kwargs={'slug': aula.slug}))
+def response(client_com_usuario_logado, aula):
+    response = client_com_usuario_logado.get(reverse("modulos:aula", kwargs={'slug': aula.slug}))
     return response
 
 
@@ -32,3 +32,14 @@ def test_vimeo(response, aula: Aula):
 
 def test_modulo_breadcrumb(response, modulo: Modulo):
     assert_contains(response, f'class="breadcrumb-item"><a href="{modulo.get_absolute_url()}">{modulo.titulo}')
+
+
+@pytest.fixture
+def response_sem_usuario(client, aula):
+    response = client.get(reverse("modulos:aula", kwargs={'slug': aula.slug}))
+    return response
+
+
+def test_usuario_nao_logado_redirect(response_sem_usuario):
+    assert response_sem_usuario.status_code == 302
+    assert response_sem_usuario.url.startswith(reverse('login'))
